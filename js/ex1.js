@@ -113,3 +113,9 @@ let supprAll = document.getElementById('delete-all');
 supprAll.addEventListener('click', () => {
 	localStorage.clear();
 });
+
+// Effacer contenu du canvas
+let eraseBtn = document.getElementById('erase');
+eraseBtn.addEventListener('click', () => {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+})
