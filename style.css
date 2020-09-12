@@ -9,10 +9,13 @@ body {
 }
 
 canvas {
+	padding-top: 1px; /* fusion des marges */
 	margin: 10px;
 	border: solid 1px #333;
 }
 
+
+/**************** nav ****************/
 .nav-list {
 	display: flex;
 	justify-content: center;
@@ -42,4 +45,17 @@ canvas {
 }
 .nav-item:hover::after {
 	width: 100%;
+}
+
+
+/**************** table ****************/
+table, tr, td, th {
+	border: solid black 1px;
+	border-collapse: collapse;
+	margin: 25px 150px;
+}
+table td, th {
+	width: 80px;
+	padding: 5px 15px;
+	text-align: center;
 }
