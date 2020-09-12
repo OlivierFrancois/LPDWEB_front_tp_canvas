@@ -8,11 +8,6 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-canvas {
-	margin: 10px;
-	border: solid 1px #333;
-}
-
 
 /**************** nav ****************/
 .nav-list {
@@ -46,12 +41,33 @@ canvas {
 	width: 100%;
 }
 
+/**************** workplace ****************/
+#workplace {
+	display: flex;
+	justify-content: center;
+}
+#workplace canvas {
+	margin-right: 10px;
+	border: solid 1px #333;
+}
+#workplace form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+#workplace form fieldset {
+	display: flex;
+	flex-direction: column;
+	padding: 15px;
+	margin: 5px 0px;
+}
+
 
 /**************** table ****************/
 table, tr, td, th {
 	border: solid black 1px;
 	border-collapse: collapse;
-	margin: 25px 150px;
+	margin: 25px auto;
 }
 table td, th {
 	width: 80px;

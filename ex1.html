@@ -18,9 +18,26 @@
 
 	<h1>LPDWEB – FRONT TP : API Canvas - Exercice 1</h1>
 
-	<canvas id="myCanvas" width="600" height="400">
-		Texte de remplacement pour les navigateurs ne supportant pas Canvas.
-	</canvas>
+	<div id="workplace">
+		<canvas id="myCanvas" width="600" height="400">
+			Texte de remplacement pour les navigateurs ne supportant pas Canvas.
+		</canvas>
+		
+		<form action="#">
+			<fieldset>
+				<legend>Sauvegarder</legend>
+				<label for="title-save">Titre du dessin</label>
+				<input type="text" name="title-save" id="title-save">
+				<button id="save-draw">Sauvegarder</button>
+			</fieldset>
+			
+			<fieldset>
+				<legend>Charger</legend>
+				<select name="select-draw" id="select-draw" size=5></select>
+				<button id="load-select">Charger selection</button>
+			</fieldset>
+		</form>
+	</div>
 
 	<table id="mouse-informations">
 		<thead>
