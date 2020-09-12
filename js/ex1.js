@@ -82,6 +82,9 @@ let loadBtn = document.getElementById('load-select');
 loadBtn.addEventListener('click', () => {
 	// Récupération du nom du dessin via le select
 	let title = document.getElementById('select-draw').value;
+	
+	if (localStorage.getItem(title) == null)
+		return;
 	circles = JSON.parse(localStorage.getItem(title));
 
 	// Chaque cercle contenu dans le tableau récupéré est redessiné
@@ -93,4 +96,20 @@ loadBtn.addEventListener('click', () => {
 		ctx.arc(circle.x, circle.y, circle.radius, angleFrom, angleTo, false);
 		ctx.fill();
 	})
+});
+
+// Suppr selection
+let supprBtn = document.getElementById('del-select');
+supprBtn.addEventListener('click', () => {
+	let title = document.getElementById('select-draw').value;
+	if (localStorage.getItem(title) == null)
+		return;
+	else
+		localStorage.removeItem(title);
+})
+
+// Suppr all
+let supprAll = document.getElementById('delete-all');
+supprAll.addEventListener('click', () => {
+	localStorage.clear();
 });
