@@ -75,6 +75,7 @@ ctx.textBaseline = 'middle'; // centré verticalement
 
 ctx.fillText(msg, x, y);
 
+
 // Ligne au dessus du texte
 ctx.beginPath();
 const widthText = ctx.measureText(msg).width;
@@ -85,3 +86,7 @@ ctx.lineTo(x + widthText / 2, y - heightText);
 ctx.strokeStyle = 'grey';
 ctx.lineWidth = 3;
 ctx.stroke();
+
+
+// Effacer une zone du canvas
+ctx.clearRect(100, 100, 300, 300);
