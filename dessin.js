@@ -54,3 +54,26 @@ ctx.strokeStyle = 'purple';
 ctx.stroke();
 
 
+// Dessiner du texte
+const msg = "20°C";
+x = canvas.width/2;
+y = canvas.height/2;
+
+ctx.font = "48px sans-serif";
+ctx.lineWidth = 2;
+ctx.fillStyle = 'grey';
+ctx.textAlign = 'center'; // centré horizontalement
+ctx.textBaseline = 'middle'; // centré verticalement
+
+ctx.fillText(msg, x, y);
+
+// Ligne au dessus du texte
+ctx.beginPath();
+const widthText = ctx.measureText(msg).width;
+const heightText = ctx.measureText(msg).actualBoundingBoxAscent + 10;
+ctx.moveTo(x - widthText / 2, y - heightText);
+ctx.lineTo(x + widthText / 2, y - heightText);
+
+ctx.strokeStyle = 'grey';
+ctx.lineWidth = 2;
+ctx.stroke();
