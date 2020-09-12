@@ -2,6 +2,14 @@
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
 
+
+// Ombres portées
+ctx.shadowOffsetX = 2;
+ctx.shadowOffsetY = 2;
+ctx.shadowBlur = 4; // Etendue du flou
+ctx.shadowColor = 'black'; // Couleur de l'ombre
+
+
 // Tracé de forme géométriques
 ctx.fillStyle = 'crimson';
 ctx.fillRect(10, 10, 200, 100); // x, y, largeur, hauteur
@@ -75,5 +83,5 @@ ctx.moveTo(x - widthText / 2, y - heightText);
 ctx.lineTo(x + widthText / 2, y - heightText);
 
 ctx.strokeStyle = 'grey';
-ctx.lineWidth = 2;
+ctx.lineWidth = 3;
 ctx.stroke();
