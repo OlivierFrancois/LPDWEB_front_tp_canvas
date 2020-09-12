@@ -89,4 +89,21 @@ ctx.stroke();
 
 
 // Effacer une zone du canvas
-ctx.clearRect(100, 100, 300, 300);
+//ctx.clearRect(100, 100, 300, 300);
+
+
+// Dessiner le contenu d'une image
+const image = new Image();
+image.src = "ressources/pandacoffee.jpg";
+
+// Taille de l'image
+let ratio = image.width / image.height;
+let width = canvas.width * 0.15;
+let height = width / ratio;
+
+x = canvas.width * 3 / 4;
+y = 10;
+
+image.onload = function() {
+	ctx.drawImage(this, x, y, width, height);
+}
