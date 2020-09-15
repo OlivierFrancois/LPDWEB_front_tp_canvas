@@ -8,6 +8,11 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+canvas {
+	margin-left: 10px;
+	border: solid 1px #333;
+}
+
 
 /**************** nav ****************/
 .nav-list {
@@ -45,10 +50,6 @@ body {
 #workplace {
 	display: flex;
 	justify-content: center;
-}
-#workplace canvas {
-	margin-right: 10px;
-	border: solid 1px #333;
 }
 #workplace form {
 	display: flex;
