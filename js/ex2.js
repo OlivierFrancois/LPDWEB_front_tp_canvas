@@ -10,6 +10,7 @@ const cherckerBoard = {
 //Objet contenant les propriétés du player
 const player = {
     radius: (canvas.height / 10) / 2,
+    dRadius: 100,
     color: 'crimson',
     xPos: 100,
     yPos: 100,
@@ -18,7 +19,9 @@ const player = {
     up: false,
     down: false,
     left: false,
-    right: false
+    right: false,
+    grow: false,
+    shrink: false
 }
 
 // Variables permettant de gérer le framerate dans la fonction main
@@ -75,45 +78,44 @@ document.addEventListener("keyup", keyUpHandler, false);
 
 function keyDownHandler(e)
 {
-    switch (e.keyCode) {
-        case 38 : //Flèche haut
-            //console.log('Flèche du haut pressée');
-            player.up = true
-            break;
-        case 40 : //Flèche bas
-            //console.log('Flèche du bas pressée');
-            player.down = true
-            break;
-        case 39 : //Flèche droite
-            //console.log('Flèche du droite pressée');
-            player.right = true
-            break;
-        case 37 : //Flèche gauche
-            //console.log('Flèche du gauche pressée');
-            player.left = true
-            break;
-    }
+    if (e.keyCode === 38)
+        player.up = true;
+
+    if (e.keyCode === 40)
+        player.down = true;
+
+    if (e.keyCode === 39)
+        player.right = true;
+
+    if (e.keyCode === 37)
+        player.left = true;
+
+    if (e.keyCode === 107)
+        player.grow = true;
+
+    if (e.keyCode === 109)
+        player.shrink = true;
+
 }
 function keyUpHandler(e)
 {
-    switch (e.keyCode) {
-        case 38 : //Flèche haut
-            //console.log('Flèche du haut pressée');
-            player.up = false
-            break;
-        case 40 : //Flèche bas
-            //console.log('Flèche du bas pressée');
-            player.down = false
-            break;
-        case 39 : //Flèche droite
-            //console.log('Flèche du droite pressée');
-            player.right = false
-            break;
-        case 37 : //Flèche gauche
-            //console.log('Flèche du gauche pressée');
-            player.left = false
-            break;
-    }
+    if (e.keyCode === 38)
+        player.up = false;
+
+    if (e.keyCode === 40)
+        player.down = false;
+
+    if (e.keyCode === 39)
+        player.right = false;
+
+    if (e.keyCode === 37)
+        player.left = false;
+
+    if (e.keyCode === 107)
+        player.grow = false;
+
+    if (e.keyCode === 109)
+        player.shrink = false;
 }
 
 //____________________________ Position du joueur ____________________________//
@@ -125,8 +127,22 @@ function MovePlayer (player, deltaTime) {
     if (player.left)
         player.xPos -= player.dx * deltaTime; 
     if (player.right)
-        player.xPos += player.dx * deltaTime;  
+        player.xPos += player.dx * deltaTime;
+
+    // TO DO : Normaliser le vecteur de déplacement
 }
+
+//____________________________ Taille du joueur ____________________________//
+function SizePlayer(player, deltaTime) {
+    if (player.grow) {
+        player.radius += player.dRadius * deltaTime;
+    }
+
+    if (player.shrink) {
+        player.radius -= player.dRadius * deltaTime;
+    }
+}
+
 
 //____________________________ Main ____________________________//
 function main() {
@@ -139,8 +155,9 @@ function main() {
     // On commence par tout effacer
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Déplacement du joueur
-    MovePlayer(player, deltaTime)
+    // Modification sur le joueur
+    MovePlayer(player, deltaTime);
+    SizePlayer(player, deltaTime);
 
     // Dessin
     drawCheckerBoard(cherckerBoard);
@@ -148,4 +165,4 @@ function main() {
     requestAnimationFrame(main);
 }
 
-    main();
+main();
