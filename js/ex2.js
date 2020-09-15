@@ -120,13 +120,17 @@ function keyUpHandler(e)
 
 //____________________________ Position du joueur ____________________________//
 function MovePlayer (player, deltaTime) {
-    if (player.up)
+
+    if (player.up && ((player.yPos - player.radius) > 0))
         player.yPos -= player.dy * deltaTime;
-    if (player.down)
+        
+    if (player.down && ((player.yPos + player.radius) < canvas.height))
         player.yPos += player.dy * deltaTime;
-    if (player.left)
+
+    if (player.left && ((player.xPos - player.radius) > 0))
         player.xPos -= player.dx * deltaTime; 
-    if (player.right)
+
+    if (player.right && ((player.xPos + player.radius) < canvas.width))
         player.xPos += player.dx * deltaTime;
 
     // TO DO : Normaliser le vecteur de déplacement
