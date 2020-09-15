@@ -8,12 +8,27 @@ const cherckerBoard = {
 }
 
 //Objet contenant les propriétés du player
-const player = {
+const player1 = {
     radius: (canvas.height / 10) / 2,
     dRadius: 100,
     color: 'crimson',
-    xPos: 100,
-    yPos: 100,
+    xPos: 3 * canvas.width / 4,
+    yPos: 3 * canvas.height / 4,
+    dx: 250,
+    dy: 250,
+    up: false,
+    down: false,
+    left: false,
+    right: false,
+    grow: false,
+    shrink: false
+}
+const player2 = {
+    radius: (canvas.height / 10) / 2,
+    dRadius: 100,
+    color: 'darkorange',
+    xPos: canvas.width / 4,
+    yPos: canvas.height / 4,
     dx: 250,
     dy: 250,
     up: false,
@@ -78,44 +93,80 @@ document.addEventListener("keyup", keyUpHandler, false);
 
 function keyDownHandler(e)
 {
+    // Player 1
     if (e.keyCode === 38)
-        player.up = true;
+        player1.up = true;
 
     if (e.keyCode === 40)
-        player.down = true;
+        player1.down = true;
 
     if (e.keyCode === 39)
-        player.right = true;
+        player1.right = true;
 
     if (e.keyCode === 37)
-        player.left = true;
+        player1.left = true;
 
-    if (e.keyCode === 107)
-        player.grow = true;
+    // Player 2
+    if (e.keyCode === 90)
+        player2.up = true;
 
-    if (e.keyCode === 109)
-        player.shrink = true;
+    if (e.keyCode === 83)
+        player2.down = true;
 
+    if (e.keyCode === 68)
+        player2.right = true;
+
+    if (e.keyCode === 81)
+        player2.left = true;
+
+
+    if (e.keyCode === 107) {
+        player1.grow = true;
+        player2.grow = true;
+    }
+
+    if (e.keyCode === 109) {
+        player1.shrink = true;
+        player2.shrink = true;
+    }
 }
 function keyUpHandler(e)
 {
+    // Player 1
     if (e.keyCode === 38)
-        player.up = false;
+        player1.up = false;
 
     if (e.keyCode === 40)
-        player.down = false;
+        player1.down = false;
 
     if (e.keyCode === 39)
-        player.right = false;
+        player1.right = false;
 
     if (e.keyCode === 37)
-        player.left = false;
+        player1.left = false;
 
-    if (e.keyCode === 107)
-        player.grow = false;
+    // Player 2
+    if (e.keyCode === 90)
+        player2.up = false;
 
-    if (e.keyCode === 109)
-        player.shrink = false;
+    if (e.keyCode === 83)
+        player2.down = false;
+
+    if (e.keyCode === 68)
+        player2.right = false;
+
+    if (e.keyCode === 81)
+        player2.left = false;
+
+    if (e.keyCode === 107) {
+        player1.grow = false;
+        player2.grow = false;
+    }
+
+    if (e.keyCode === 109) {
+        player1.shrink = false;
+        player2.shrink = false;
+    }
 }
 
 //____________________________ Position du joueur ____________________________//
@@ -142,7 +193,8 @@ function SizePlayer(player, deltaTime) {
         player.radius += player.dRadius * deltaTime;
     }
 
-    if (player.shrink) {
+    // Si le player appuie sur shrink et que son rayon ne deviendra pas négatif
+    if (player.shrink && (player.radius > player.dRadius * deltaTime)) {
         player.radius -= player.dRadius * deltaTime;
     }
 }
@@ -160,12 +212,15 @@ function main() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Modification sur le joueur
-    MovePlayer(player, deltaTime);
-    SizePlayer(player, deltaTime);
+    MovePlayer(player1, deltaTime);
+    MovePlayer(player2, deltaTime);
+    SizePlayer(player1, deltaTime);
+    SizePlayer(player2, deltaTime);
 
     // Dessin
     drawCheckerBoard(cherckerBoard);
-    drawPlayer(player);
+    drawPlayer(player1);
+    drawPlayer(player2);
     requestAnimationFrame(main);
 }
 
