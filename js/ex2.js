@@ -12,7 +12,9 @@ const player = {
     radius: (canvas.height / 10) / 2,
     color: 'crimson',
     xPos: 100,
-    yPos: 100
+    yPos: 100,
+    dx: 5,
+    dy: 5
 }
 
 
@@ -57,5 +59,61 @@ function drawPlayer(player) {
     ctx.stroke();
 }
 
-drawCheckerBoard(cherckerBoard);
-drawPlayer(player);
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawCheckerBoard(cherckerBoard);
+    drawPlayer(player);
+}
+
+
+//____________________________ Gestion des inputs ____________________________//
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+
+
+function keyDownHandler(e)
+{
+    switch (e.keyCode) {
+        case 38 : //Flèche haut
+            //console.log('Flèche du haut pressée');
+            player.yPos -= player.dy;
+            draw();
+            break;
+        case 40 : //Flèche bas
+            //console.log('Flèche du bas pressée');
+            player.yPos += player.dy;
+            draw();
+            break;
+        case 39 : //Flèche droite
+            //console.log('Flèche du droite pressée');
+            player.xPos += player.dx;
+            draw();
+            break;
+        case 37 : //Flèche gauche
+            //console.log('Flèche du gauche pressée');
+            player.xPos -= player.dx;
+            draw();
+            break;
+    }
+}
+function keyUpHandler(e)
+
+{
+    switch (e.keyCode) {
+        case 38 :
+            //Flèche haut
+            break;
+        case 40 :
+            //Flèche bas
+            break;
+        case 39 :
+            //Flèche droite
+            break;
+        case 37 :
+            //Flèche gauche
+            break;
+    }
+}
+
+draw();
