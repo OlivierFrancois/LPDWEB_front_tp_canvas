@@ -13,9 +13,18 @@ const player = {
     color: 'crimson',
     xPos: 100,
     yPos: 100,
-    dx: 5,
-    dy: 5
+    dx: 250,
+    dy: 250,
+    up: false,
+    down: false,
+    left: false,
+    right: false
 }
+
+// Variables permettant de gérer le framerate dans la fonction main
+let previousTime = 0;
+let currentTime = new Date();
+let deltaTime = 0;
 
 
 //____________________________ Dessin du damier ____________________________//
@@ -60,60 +69,83 @@ function drawPlayer(player) {
 }
 
 
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawCheckerBoard(cherckerBoard);
-    drawPlayer(player);
-}
-
-
 //____________________________ Gestion des inputs ____________________________//
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
-
 
 function keyDownHandler(e)
 {
     switch (e.keyCode) {
         case 38 : //Flèche haut
             //console.log('Flèche du haut pressée');
-            player.yPos -= player.dy;
-            draw();
+            player.up = true
             break;
         case 40 : //Flèche bas
             //console.log('Flèche du bas pressée');
-            player.yPos += player.dy;
-            draw();
+            player.down = true
             break;
         case 39 : //Flèche droite
             //console.log('Flèche du droite pressée');
-            player.xPos += player.dx;
-            draw();
+            player.right = true
             break;
         case 37 : //Flèche gauche
             //console.log('Flèche du gauche pressée');
-            player.xPos -= player.dx;
-            draw();
+            player.left = true
             break;
     }
 }
 function keyUpHandler(e)
-
 {
     switch (e.keyCode) {
-        case 38 :
-            //Flèche haut
+        case 38 : //Flèche haut
+            //console.log('Flèche du haut pressée');
+            player.up = false
             break;
-        case 40 :
-            //Flèche bas
+        case 40 : //Flèche bas
+            //console.log('Flèche du bas pressée');
+            player.down = false
             break;
-        case 39 :
-            //Flèche droite
+        case 39 : //Flèche droite
+            //console.log('Flèche du droite pressée');
+            player.right = false
             break;
-        case 37 :
-            //Flèche gauche
+        case 37 : //Flèche gauche
+            //console.log('Flèche du gauche pressée');
+            player.left = false
             break;
     }
 }
 
-draw();
+//____________________________ Position du joueur ____________________________//
+function MovePlayer (player, deltaTime) {
+    if (player.up)
+        player.yPos -= player.dy * deltaTime;
+    if (player.down)
+        player.yPos += player.dy * deltaTime;
+    if (player.left)
+        player.xPos -= player.dx * deltaTime; 
+    if (player.right)
+        player.xPos += player.dx * deltaTime;  
+}
+
+//____________________________ Main ____________________________//
+function main() {
+    currentTime = new Date();
+    deltaTime = (currentTime - previousTime) / 1000;
+    previousTime = currentTime;
+    
+    //console.log(deltaTime);
+
+    // On commence par tout effacer
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Déplacement du joueur
+    MovePlayer(player, deltaTime)
+
+    // Dessin
+    drawCheckerBoard(cherckerBoard);
+    drawPlayer(player);
+    requestAnimationFrame(main);
+}
+
+    main();
